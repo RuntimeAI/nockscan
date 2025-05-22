@@ -16,7 +16,7 @@ export default function SubscriptionForm() {
           href={typeformUrl} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-block px-8 py-4 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition-colors text-lg shadow-md hover:shadow-lg transform hover:-translate-y-1"
+          className="inline-block px-8 py-4 bg-white hover:bg-gray-100 text-gray-700 font-bold rounded-lg transition-colors text-lg shadow-md hover:shadow-lg transform hover:-translate-y-1"
         >
           {t('subscribe_button')}
         </a>
