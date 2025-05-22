@@ -12,12 +12,12 @@ export default function ClientComponent({ id }: { id: string }) {
     // Find the block with the matching ID in our mock data
     // In a real app, this would be an API call
     const blockNumber = parseInt(id, 10);
-    const foundBlock = mockBlocks.find(b => b.number === blockNumber);
+    const foundBlock = mockBlocks.find((b: Block) => b.number === blockNumber);
     
     if (foundBlock) {
       setBlock(foundBlock);
       // Find transactions in this block
-      const blockTransactions = mockTransactions.filter(tx => tx.blockNumber === blockNumber);
+      const blockTransactions = mockTransactions.filter((tx: Transaction) => tx.block === blockNumber);
       setTransactions(blockTransactions);
     }
   }, [id]);
@@ -60,7 +60,7 @@ export default function ClientComponent({ id }: { id: string }) {
               
               <div>
                 <div className="font-medium text-gray-500">Transactions</div>
-                <div>{block.transactionCount}</div>
+                <div>{block.transactions}</div>
               </div>
             </div>
             
@@ -75,13 +75,13 @@ export default function ClientComponent({ id }: { id: string }) {
               </div>
               
               <div>
-                <div className="font-medium text-gray-500">Size</div>
-                <div>{block.size} bytes</div>
+                <div className="font-medium text-gray-500">Gas Used</div>
+                <div>{block.gasUsed.toLocaleString()} ({Math.round(block.gasUsed / block.gasLimit * 100)}%)</div>
               </div>
               
               <div>
                 <div className="font-medium text-gray-500">Block Reward</div>
-                <div>{block.rewards} NCK</div>
+                <div>{block.reward} NOCK</div>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export default function ClientComponent({ id }: { id: string }) {
                     </div>
                     
                     <div className="col-span-2 text-gray-500">Value</div>
-                    <div className="col-span-10">{tx.value} NCK</div>
+                    <div className="col-span-10">{tx.value} NOCK</div>
                   </div>
                 </div>
               </div>

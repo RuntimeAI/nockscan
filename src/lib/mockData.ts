@@ -2,9 +2,15 @@
 export const BASE_TIME = 1714521600000; // 2024-05-01T00:00:00.000Z
 
 // 格式化时间戳，使用固定的BASE_TIME，避免水合问题
-export const formatTimestamp = (offset = 0) => {
+export const formatTimestamp = (offsetOrTimestamp: number | string) => {
+  // If it's already a timestamp string, just return a formatted date
+  if (typeof offsetOrTimestamp === 'string') {
+    return new Date(offsetOrTimestamp).toLocaleString();
+  }
+  
+  // Otherwise, treat it as an offset from BASE_TIME
   // 确保offset是一个有效的数字，避免无效时间
-  const safeOffset = typeof offset === 'number' ? offset : 0;
+  const safeOffset = typeof offsetOrTimestamp === 'number' ? offsetOrTimestamp : 0;
   // 防止负数时间戳导致错误
   const timestamp = Math.max(0, BASE_TIME - safeOffset * 1000);
   const date = new Date(timestamp);
@@ -48,6 +54,19 @@ const fixedTransactionCounts = [18, 24, 32, 15, 42, 28, 19, 37, 22, 30];
 const fixedGasUsed = [4500000, 6200000, 3800000, 5100000, 7000000, 4200000, 6500000, 3900000, 5800000, 4700000];
 const fixedDifficulties = [546.7, 612.3, 589.1, 632.8, 604.2, 578.9, 596.3, 621.5, 614.7, 587.2];
 
+// Block interface
+export interface Block {
+  number: number;
+  hash: string;
+  timestamp: string;
+  miner: string;
+  transactions: number;
+  difficulty: number;
+  gasUsed: number;
+  gasLimit: number;
+  reward: number;
+}
+
 // 创建模拟区块
 export const mockBlocks = Array.from({ length: 10 }, (_, i) => ({
   number: 1000 - i,
@@ -65,6 +84,19 @@ export const mockBlocks = Array.from({ length: 10 }, (_, i) => ({
 const fixedValues = ['3.4218', '7.5162', '1.2095', '5.8271', '0.9354', '2.1873', '4.6529', '8.3901', '6.7245', '9.0183'];
 const fixedGasUsedTx = [21500, 45000, 32750, 68200, 125000, 84300, 37900, 92700, 56800, 145000];
 const fixedGasPrices = [25, 18, 32, 27, 45, 39, 22, 15, 36, 28];
+
+// Type for Transaction
+export interface Transaction {
+  hash: string;
+  from: string;
+  to: string;
+  value: string;
+  timestamp: string;
+  block: number;
+  gasUsed: number;
+  gasPrice: number;
+  status: string;
+}
 
 // 创建模拟交易
 export const mockTransactions = Array.from({ length: 20 }, (_, i) => {
@@ -86,7 +118,7 @@ export const mockTransactions = Array.from({ length: 20 }, (_, i) => {
 });
 
 // 地址类型定义
-interface Address {
+export interface Address {
   address: string;
   balance: string;
   transactionCount: number;

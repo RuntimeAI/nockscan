@@ -10,7 +10,7 @@ export default function ClientComponent({ hash }: { hash: string }) {
   useEffect(() => {
     // Find the transaction with the matching hash in our mock data
     // In a real app, this would be an API call
-    const foundTransaction = mockTransactions.find(tx => tx.hash === hash);
+    const foundTransaction = mockTransactions.find((tx: Transaction) => tx.hash === hash);
     
     if (foundTransaction) {
       setTransaction(foundTransaction);
@@ -50,8 +50,8 @@ export default function ClientComponent({ hash }: { hash: string }) {
             <div>
               <div className="font-medium text-gray-500">Block</div>
               <div>
-                <Link href={`/block/${transaction.blockNumber}`} className="text-blue-600 hover:underline">
-                  {transaction.blockNumber}
+                <Link href={`/block/${transaction.block}`} className="text-blue-600 hover:underline">
+                  {transaction.block}
                 </Link>
               </div>
             </div>
@@ -82,12 +82,12 @@ export default function ClientComponent({ hash }: { hash: string }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="font-medium text-gray-500">Value</div>
-                <div className="text-lg font-semibold">{transaction.value} NCK</div>
+                <div className="text-lg font-semibold">{transaction.value} NOCK</div>
               </div>
               
               <div>
                 <div className="font-medium text-gray-500">Transaction Fee</div>
-                <div>{transaction.fee} NCK</div>
+                <div>{(transaction.gasUsed * transaction.gasPrice / 1e9).toFixed(5)} NOCK</div>
               </div>
             </div>
           </div>

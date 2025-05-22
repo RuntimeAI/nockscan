@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    domains: ['placekitten.com', 'via.placeholder.com']
+  },
   output: 'export',
-  // 仅在生产环境使用basePath
+  distDir: 'out',
   basePath: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
   // 仅在生产环境使用assetPrefix
   assetPrefix: process.env.NODE_ENV === 'production' ? '/nockscan' : '',

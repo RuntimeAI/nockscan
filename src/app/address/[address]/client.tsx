@@ -11,14 +11,14 @@ export default function ClientComponent({ address }: { address: string }) {
   useEffect(() => {
     // Find the address in our mock data
     // In a real app, this would be an API call
-    const foundAddress = mockAddresses.find(a => a.address === address);
+    const foundAddress = mockAddresses.find((a: Address) => a.address === address);
     
     if (foundAddress) {
       setAddressInfo(foundAddress);
       
       // Find transactions involving this address
       const addressTransactions = mockTransactions.filter(
-        tx => tx.from === address || tx.to === address
+        (tx: Transaction) => tx.from === address || tx.to === address
       );
       
       setTransactions(addressTransactions);
@@ -58,7 +58,7 @@ export default function ClientComponent({ address }: { address: string }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <div className="font-medium text-gray-500">Balance</div>
-                <div className="text-lg font-semibold">{addressInfo.balance} NCK</div>
+                <div className="text-lg font-semibold">{addressInfo.balance} NOCK</div>
               </div>
               
               <div>
@@ -117,7 +117,7 @@ export default function ClientComponent({ address }: { address: string }) {
                     </div>
                     
                     <div className="col-span-2 text-gray-500">Value</div>
-                    <div className="col-span-10">{tx.value} NCK</div>
+                    <div className="col-span-10">{tx.value} NOCK</div>
                   </div>
                 </div>
               </div>
