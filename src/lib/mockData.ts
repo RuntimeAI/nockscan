@@ -24,12 +24,15 @@ export interface Address {
   transactionCount: number;
 }
 
+// Fixed base timestamp to prevent hydration mismatches
+const BASE_TIME = 1716469840000; // A fixed timestamp
+
 // Mock Blocks
 export const mockBlocks: Block[] = [
   {
     number: 1000,
     hash: "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
-    timestamp: Date.now() - 60000, // 1 minute ago
+    timestamp: BASE_TIME - 60000, // 1 minute ago
     miner: "0xABC123def456GHI789jkl012MNO345pqr678STU",
     transactionCount: 10,
     size: 1024,
@@ -38,7 +41,7 @@ export const mockBlocks: Block[] = [
   {
     number: 999,
     hash: "0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3",
-    timestamp: Date.now() - 120000, // 2 minutes ago
+    timestamp: BASE_TIME - 120000, // 2 minutes ago
     miner: "0xDEF456ghi789JKL012mno345PQR678stu901VWX",
     transactionCount: 8,
     size: 893,
@@ -47,7 +50,7 @@ export const mockBlocks: Block[] = [
   {
     number: 998,
     hash: "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4",
-    timestamp: Date.now() - 180000, // 3 minutes ago
+    timestamp: BASE_TIME - 180000, // 3 minutes ago
     miner: "0xGHI789jkl012MNO345pqr678STU901vwx234YZA",
     transactionCount: 12,
     size: 1156,
@@ -56,7 +59,7 @@ export const mockBlocks: Block[] = [
   {
     number: 997,
     hash: "0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5",
-    timestamp: Date.now() - 240000, // 4 minutes ago
+    timestamp: BASE_TIME - 240000, // 4 minutes ago
     miner: "0xJKL012mno345PQR678stu901VWX234yza567BCD",
     transactionCount: 6,
     size: 721,
@@ -65,7 +68,7 @@ export const mockBlocks: Block[] = [
   {
     number: 996,
     hash: "0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6",
-    timestamp: Date.now() - 300000, // 5 minutes ago
+    timestamp: BASE_TIME - 300000, // 5 minutes ago
     miner: "0xMNO345pqr678STU901vwx234YZA567bcd890EFG",
     transactionCount: 15,
     size: 1528,
@@ -78,7 +81,7 @@ export const mockTransactions: Transaction[] = [
   {
     hash: "0xabcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
     blockNumber: 1000,
-    timestamp: Date.now() - 30000, // 30 seconds ago
+    timestamp: BASE_TIME - 30000, // 30 seconds ago
     from: "0xABC123def456GHI789jkl012MNO345pqr678STU",
     to: "0xDEF456ghi789JKL012mno345PQR678stu901VWX",
     value: "1.25",
@@ -87,7 +90,7 @@ export const mockTransactions: Transaction[] = [
   {
     hash: "0x123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0",
     blockNumber: 1000,
-    timestamp: Date.now() - 45000, // 45 seconds ago
+    timestamp: BASE_TIME - 45000, // 45 seconds ago
     from: "0xGHI789jkl012MNO345pqr678STU901vwx234YZA",
     to: "0xJKL012mno345PQR678stu901VWX234yza567BCD",
     value: "0.75",
@@ -96,7 +99,7 @@ export const mockTransactions: Transaction[] = [
   {
     hash: "0x56789abcdef0123456789abcdef0123456789abcdef0123456789abcdef01234",
     blockNumber: 999,
-    timestamp: Date.now() - 90000, // 1.5 minutes ago
+    timestamp: BASE_TIME - 90000, // 1.5 minutes ago
     from: "0xMNO345pqr678STU901vwx234YZA567bcd890EFG",
     to: "0xABC123def456GHI789jkl012MNO345pqr678STU",
     value: "3.5",
@@ -105,7 +108,7 @@ export const mockTransactions: Transaction[] = [
   {
     hash: "0x789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456",
     blockNumber: 999,
-    timestamp: Date.now() - 110000, // ~1.8 minutes ago
+    timestamp: BASE_TIME - 110000, // ~1.8 minutes ago
     from: "0xDEF456ghi789JKL012mno345PQR678stu901VWX",
     to: "0xGHI789jkl012MNO345pqr678STU901vwx234YZA",
     value: "2.1",
@@ -114,7 +117,7 @@ export const mockTransactions: Transaction[] = [
   {
     hash: "0x9abcdef0123456789abcdef0123456789abcdef0123456789abcdef012345678",
     blockNumber: 998,
-    timestamp: Date.now() - 150000, // 2.5 minutes ago
+    timestamp: BASE_TIME - 150000, // 2.5 minutes ago
     from: "0xJKL012mno345PQR678stu901VWX234yza567BCD",
     to: "0xMNO345pqr678STU901vwx234YZA567bcd890EFG",
     value: "0.45",
@@ -153,7 +156,7 @@ export const mockAddresses: Address[] = [
 
 // Helper function to format timestamps
 export function formatTimestamp(timestamp: number): string {
-  const now = Date.now();
+  const now = typeof window !== 'undefined' ? Date.now() : BASE_TIME;
   const diff = now - timestamp;
   
   if (diff < 60000) { // Less than 1 minute

@@ -1,9 +1,33 @@
+"use client";
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import BlockchainStats from '@/components/BlockchainStats';
 import LatestBlocks from '@/components/LatestBlocks';
 import LatestTransactions from '@/components/LatestTransactions';
 import { mockBlocks, mockTransactions } from '@/lib/mockData';
 
 export default function Home() {
+  const router = useRouter();
+
+  // Handle redirects from GitHub Pages 404.html
+  useEffect(() => {
+    // Check if we have query params from a 404 redirect
+    const { pathname, search } = window.location;
+    const hasQueryParams = search.includes('?p=/');
+    
+    if (hasQueryParams) {
+      // Get the pathname from the query
+      const path = search.split('?p=/')[1]?.split('&')[0] || '';
+      if (path) {
+        // Remove the query params
+        window.history.replaceState(null, '', '/' + path);
+        // Navigate to the path
+        router.push('/' + path);
+      }
+    }
+  }, [router]);
+
   return (
     <div>
       <BlockchainStats />

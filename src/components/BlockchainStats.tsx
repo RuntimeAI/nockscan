@@ -21,8 +21,14 @@ export default function BlockchainStats() {
     difficulty: '3.42 TH',
   });
 
-  // Simulate live updates for demo
+  // Simulate live updates for demo - client-side only
   useEffect(() => {
+    // Initial update to ensure client/server match
+    setStats(currentStats => ({
+      ...currentStats
+    }));
+    
+    // Set up interval for updates
     const interval = setInterval(() => {
       setStats(prev => ({
         ...prev,
