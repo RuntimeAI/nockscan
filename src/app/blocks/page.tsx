@@ -2,7 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Block, mockBlocks, formatTimestamp, truncateHash } from '@/lib/mockData';
+import { mockBlocks, formatTimestamp, truncateHash } from '../../lib/mockData';
+
+// Define the block type to match our actual data structure
+interface Block {
+  number: number;
+  hash: string;
+  timestamp: string;
+  miner: string;
+  transactions: number;
+  difficulty: number;
+  gasUsed: number;
+  gasLimit: number;
+  reward: number;
+}
 
 export default function Blocks() {
   const [blocks, setBlocks] = useState<Block[]>([]);
@@ -59,7 +72,7 @@ export default function Blocks() {
                   Miner
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Size
+                  Gas Used
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Reward
@@ -75,10 +88,10 @@ export default function Blocks() {
                     </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                    {formatTimestamp(block.timestamp)}
+                    {new Date(block.timestamp).toLocaleTimeString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {block.transactionCount}
+                    {block.transactions}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link href={`/address/${block.miner}`} className="text-blue-600 hover:underline">
@@ -86,10 +99,10 @@ export default function Blocks() {
                     </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {block.size} bytes
+                    {block.gasUsed.toLocaleString()} ({Math.round(block.gasUsed / block.gasLimit * 100)}%)
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {block.rewards} NCK
+                    {block.reward} NOCK
                   </td>
                 </tr>
               ))}

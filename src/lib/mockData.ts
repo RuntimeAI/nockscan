@@ -1,131 +1,98 @@
-export interface Block {
-  number: number;
-  hash: string;
-  timestamp: number;
-  miner: string;
-  transactionCount: number;
-  size: number;
-  rewards: string;
-}
+// BASE_TIME 是用于确保服务器端和客户端渲染一致的固定时间戳
+export const BASE_TIME = 1714521600000; // 2024-05-01T00:00:00.000Z
 
-export interface Transaction {
-  hash: string;
-  blockNumber: number;
-  timestamp: number;
-  from: string;
-  to: string;
-  value: string;
-  fee: string;
-}
+// 格式化时间戳，使用固定的BASE_TIME，避免水合问题
+export const formatTimestamp = (offset = 0) => {
+  // 确保offset是一个有效的数字，避免无效时间
+  const safeOffset = typeof offset === 'number' ? offset : 0;
+  // 防止负数时间戳导致错误
+  const timestamp = Math.max(0, BASE_TIME - safeOffset * 1000);
+  const date = new Date(timestamp);
+  return date.toISOString();
+};
 
-export interface Address {
+// 截断哈希值，保留前面和后面的字符
+export const truncateHash = (hash: string, startChars = 6, endChars = 4) => {
+  if (!hash || hash.length <= startChars + endChars) {
+    return hash;
+  }
+  
+  return `${hash.substring(0, startChars)}...${hash.substring(hash.length - endChars)}`;
+};
+
+// 固定哈希值用于确保服务器/客户端一致性
+const staticHashes = [
+  '0x7ae3f3b24a276e605ce9a84adfd0f1f730a83d8b6728ad8972fd7a9a72b7d2c0',
+  '0x95a24a5e62e8f6e59a3f1274fe73f3ba05c83b8e0867f443cb396dc3c2beec68',
+  '0x3a0cf65d70b2df41a8308ce7d56ae7c50d712a3c6642c99c1616e0a636ef4df0',
+  '0x2e4b327827a9b971f010726d8fe86553f047c0e029c47c9ec1b06a076f48bed1',
+  '0x1c7da855c84c62afaf89c137caf2a3a992173a55cfd5c41c57c99b482ab46fe6',
+  '0xdb98550ede4ccab1906618ba92a7ecd61e87f64c5e44c241765b9cd7595dc386',
+  '0x4f73acd32116aa2235d8fc7d95db65bc3f12f6cd81f984fb62b95ac4bb04d10a',
+  '0x6c92da5a423864ecc46c77cc577dcd7c7e106cedaf912e1c0dd81c7af8c3cd32',
+  '0x8e4c6ad8b88ed34e1e8086f057c91abb75e012e528e5ada77342fac8e7f49e0a',
+  '0xd7bf1dbeb7943e43a5c30890c7f0e92b1329affed95e3123478268e4bea5fc11'
+];
+
+// 创建模拟地址数组
+const addressList = [
+  '0x3a4e02f8F486CD1a39A80F5aFd64a38d83a7aedB',
+  '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+  '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
+  '0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0'
+];
+
+// 固定的交易数量，避免服务器-客户端水合不匹配
+const fixedTransactionCounts = [18, 24, 32, 15, 42, 28, 19, 37, 22, 30];
+const fixedGasUsed = [4500000, 6200000, 3800000, 5100000, 7000000, 4200000, 6500000, 3900000, 5800000, 4700000];
+const fixedDifficulties = [546.7, 612.3, 589.1, 632.8, 604.2, 578.9, 596.3, 621.5, 614.7, 587.2];
+
+// 创建模拟区块
+export const mockBlocks = Array.from({ length: 10 }, (_, i) => ({
+  number: 1000 - i,
+  hash: staticHashes[i],
+  timestamp: formatTimestamp(i * 15),
+  miner: addressList[i % addressList.length],
+  transactions: fixedTransactionCounts[i],
+  difficulty: fixedDifficulties[i],
+  gasUsed: fixedGasUsed[i],
+  gasLimit: 10000000,
+  reward: 2
+}));
+
+// 为交易创建固定值
+const fixedValues = ['3.4218', '7.5162', '1.2095', '5.8271', '0.9354', '2.1873', '4.6529', '8.3901', '6.7245', '9.0183'];
+const fixedGasUsedTx = [21500, 45000, 32750, 68200, 125000, 84300, 37900, 92700, 56800, 145000];
+const fixedGasPrices = [25, 18, 32, 27, 45, 39, 22, 15, 36, 28];
+
+// 创建模拟交易
+export const mockTransactions = Array.from({ length: 20 }, (_, i) => {
+  const hashIndex = i % 10;
+  const fromIndex = (i % 5);
+  const toIndex = ((i + 2) % 5);
+  
+  return {
+    hash: staticHashes[hashIndex],
+    from: addressList[fromIndex],
+    to: addressList[toIndex],
+    value: fixedValues[i % 10],
+    timestamp: formatTimestamp(i * 5),
+    block: 1000 - Math.floor(i / 2),
+    gasUsed: fixedGasUsedTx[i % 10],
+    gasPrice: fixedGasPrices[i % 10],
+    status: i % 7 === 0 ? 'failed' : 'success'
+  };
+});
+
+// 地址类型定义
+interface Address {
   address: string;
   balance: string;
   transactionCount: number;
 }
 
-// Fixed base timestamp to prevent hydration mismatches
-const BASE_TIME = 1716469840000; // A fixed timestamp
-
-// Mock Blocks
-export const mockBlocks: Block[] = [
-  {
-    number: 1000,
-    hash: "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
-    timestamp: BASE_TIME - 60000, // 1 minute ago
-    miner: "0xABC123def456GHI789jkl012MNO345pqr678STU",
-    transactionCount: 10,
-    size: 1024,
-    rewards: "5.0"
-  },
-  {
-    number: 999,
-    hash: "0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3",
-    timestamp: BASE_TIME - 120000, // 2 minutes ago
-    miner: "0xDEF456ghi789JKL012mno345PQR678stu901VWX",
-    transactionCount: 8,
-    size: 893,
-    rewards: "5.0"
-  },
-  {
-    number: 998,
-    hash: "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4",
-    timestamp: BASE_TIME - 180000, // 3 minutes ago
-    miner: "0xGHI789jkl012MNO345pqr678STU901vwx234YZA",
-    transactionCount: 12,
-    size: 1156,
-    rewards: "5.0"
-  },
-  {
-    number: 997,
-    hash: "0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5",
-    timestamp: BASE_TIME - 240000, // 4 minutes ago
-    miner: "0xJKL012mno345PQR678stu901VWX234yza567BCD",
-    transactionCount: 6,
-    size: 721,
-    rewards: "5.0"
-  },
-  {
-    number: 996,
-    hash: "0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6",
-    timestamp: BASE_TIME - 300000, // 5 minutes ago
-    miner: "0xMNO345pqr678STU901vwx234YZA567bcd890EFG",
-    transactionCount: 15,
-    size: 1528,
-    rewards: "5.0"
-  }
-];
-
-// Mock Transactions
-export const mockTransactions: Transaction[] = [
-  {
-    hash: "0xabcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
-    blockNumber: 1000,
-    timestamp: BASE_TIME - 30000, // 30 seconds ago
-    from: "0xABC123def456GHI789jkl012MNO345pqr678STU",
-    to: "0xDEF456ghi789JKL012mno345PQR678stu901VWX",
-    value: "1.25",
-    fee: "0.005"
-  },
-  {
-    hash: "0x123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0",
-    blockNumber: 1000,
-    timestamp: BASE_TIME - 45000, // 45 seconds ago
-    from: "0xGHI789jkl012MNO345pqr678STU901vwx234YZA",
-    to: "0xJKL012mno345PQR678stu901VWX234yza567BCD",
-    value: "0.75",
-    fee: "0.003"
-  },
-  {
-    hash: "0x56789abcdef0123456789abcdef0123456789abcdef0123456789abcdef01234",
-    blockNumber: 999,
-    timestamp: BASE_TIME - 90000, // 1.5 minutes ago
-    from: "0xMNO345pqr678STU901vwx234YZA567bcd890EFG",
-    to: "0xABC123def456GHI789jkl012MNO345pqr678STU",
-    value: "3.5",
-    fee: "0.008"
-  },
-  {
-    hash: "0x789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456",
-    blockNumber: 999,
-    timestamp: BASE_TIME - 110000, // ~1.8 minutes ago
-    from: "0xDEF456ghi789JKL012mno345PQR678stu901VWX",
-    to: "0xGHI789jkl012MNO345pqr678STU901vwx234YZA",
-    value: "2.1",
-    fee: "0.006"
-  },
-  {
-    hash: "0x9abcdef0123456789abcdef0123456789abcdef0123456789abcdef012345678",
-    blockNumber: 998,
-    timestamp: BASE_TIME - 150000, // 2.5 minutes ago
-    from: "0xJKL012mno345PQR678stu901VWX234yza567BCD",
-    to: "0xMNO345pqr678STU901vwx234YZA567bcd890EFG",
-    value: "0.45",
-    fee: "0.002"
-  }
-];
-
-// Mock Addresses
+// 创建模拟地址数据
 export const mockAddresses: Address[] = [
   {
     address: "0xABC123def456GHI789jkl012MNO345pqr678STU",
@@ -152,30 +119,4 @@ export const mockAddresses: Address[] = [
     balance: "312.4",
     transactionCount: 78
   }
-];
-
-// Helper function to format timestamps
-export function formatTimestamp(timestamp: number): string {
-  const now = typeof window !== 'undefined' ? Date.now() : BASE_TIME;
-  const diff = now - timestamp;
-  
-  if (diff < 60000) { // Less than 1 minute
-    const secs = Math.floor(diff / 1000);
-    return `${secs} secs ago`;
-  } else if (diff < 3600000) { // Less than 1 hour
-    const mins = Math.floor(diff / 60000);
-    return `${mins} min${mins > 1 ? 's' : ''} ago`;
-  } else if (diff < 86400000) { // Less than 1 day
-    const hours = Math.floor(diff / 3600000);
-    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-  } else {
-    const days = Math.floor(diff / 86400000);
-    return `${days} day${days > 1 ? 's' : ''} ago`;
-  }
-}
-
-// Helper function to truncate addresses and hashes
-export function truncateHash(hash: string, length = 8): string {
-  if (!hash || hash.length < 20) return hash;
-  return `${hash.substring(0, length)}...${hash.substring(hash.length - length)}`;
-} 
+]; 

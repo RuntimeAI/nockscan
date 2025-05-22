@@ -1,46 +1,65 @@
-import Link from 'next/link';
-import { Block, formatTimestamp, truncateHash } from '../lib/mockData';
+"use client";
 
-interface LatestBlocksProps {
-  blocks: Block[];
+import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
+
+interface Block {
+  number: number;
+  hash: string;
+  timestamp: string;
+  miner: string;
+  transactions: number;
+  gasUsed: number;
+  gasLimit: number;
+  reward: number;
 }
 
-export default function LatestBlocks({ blocks }: LatestBlocksProps) {
+export default function LatestBlocks({ blocks }: { blocks: Block[] }) {
+  const { t } = useLanguage();
+  
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="p-4 bg-blue-900 text-white flex justify-between items-center">
-        <h2 className="text-lg font-medium">Latest Blocks</h2>
-        <Link href="/blocks" className="text-sm hover:underline">
-          View all blocks
+    <div className="bg-white rounded-lg shadow">
+      <div className="border-b border-gray-200 px-4 py-3 flex justify-between items-center">
+        <h2 className="text-lg font-medium text-gray-800">{t('blocks_footer')}</h2>
+        <Link href="/blocks" className="text-sm text-blue-600 hover:text-blue-800 transition-colors">
+          {t('browse')} &rarr;
         </Link>
       </div>
       
-      <div className="divide-y divide-gray-200">
+      <div className="divide-y divide-gray-100">
         {blocks.map((block) => (
-          <div key={block.hash} className="p-4 hover:bg-gray-50">
+          <div key={block.number} className="px-4 py-3 hover:bg-gray-50 transition-colors">
             <div className="flex justify-between">
-              <div className="space-y-1">
-                <Link href={`/block/${block.number}`} className="font-medium text-blue-600 hover:underline">
+              <div>
+                <Link href={`/block/${block.number}`} className="font-medium text-blue-600 hover:text-blue-800">
                   {block.number}
                 </Link>
-                <div className="text-gray-500 text-sm">
-                  {formatTimestamp(block.timestamp)}
+                <div className="text-xs text-gray-500 mt-1">
+                  <span>
+                    {new Date(block.timestamp).toLocaleTimeString()}
+                  </span>
                 </div>
               </div>
               
-              <div className="text-right space-y-1">
+              <div className="text-right">
                 <div className="text-sm">
-                  Miner <Link href={`/address/${block.miner}`} className="text-blue-600 hover:underline">
-                    {truncateHash(block.miner, 6)}
-                  </Link>
+                  <span className="text-gray-600">{block.transactions} txns</span>
                 </div>
-                <div className="text-gray-500 text-sm">
-                  {block.transactionCount} txns in {block.size} bytes
+                <div className="text-xs text-gray-500 mt-1">
+                  <Link href={`/address/${block.miner}`} className="text-blue-600 hover:text-blue-800">
+                    {block.miner.slice(0, 6)}...{block.miner.slice(-4)}
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         ))}
+      </div>
+      
+      <div className="border-t border-gray-200 px-4 py-3 text-center">
+        <Link href="/blocks" className="text-sm text-blue-600 hover:text-blue-800 transition-colors">
+          {t('blocks_footer')} &rarr;
+        </Link>
       </div>
     </div>
   );

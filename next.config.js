@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/nockscan',
-  // Required to make GitHub Pages work with client-side routing
-  assetPrefix: '/nockscan',
+  // 仅在生产环境使用basePath
+  basePath: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
+  // 仅在生产环境使用assetPrefix
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
   images: {
     unoptimized: true,
   },

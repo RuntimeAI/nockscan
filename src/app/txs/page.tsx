@@ -2,7 +2,20 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Transaction, mockTransactions, formatTimestamp, truncateHash } from '@/lib/mockData';
+import { mockTransactions, formatTimestamp, truncateHash } from '../../lib/mockData';
+
+// Define the transaction type to match our actual data structure
+interface Transaction {
+  hash: string;
+  from: string;
+  to: string;
+  value: string;
+  timestamp: string;
+  block: number;
+  gasUsed: number;
+  gasPrice: number;
+  status: string;
+}
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -11,7 +24,11 @@ export default function Transactions() {
 
   useEffect(() => {
     // Sort transactions by timestamp in descending order (newest first)
-    const sortedTransactions = [...mockTransactions].sort((a, b) => b.timestamp - a.timestamp);
+    const sortedTransactions = [...mockTransactions].sort((a, b) => {
+      const dateA = new Date(a.timestamp).getTime();
+      const dateB = new Date(b.timestamp).getTime();
+      return dateB - dateA;
+    });
     setTransactions(sortedTransactions);
   }, []);
 
@@ -78,12 +95,12 @@ export default function Transactions() {
                     </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <Link href={`/block/${tx.blockNumber}`} className="text-blue-600 hover:underline">
-                      {tx.blockNumber}
+                    <Link href={`/block/${tx.block}`} className="text-blue-600 hover:underline">
+                      {tx.block}
                     </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                    {formatTimestamp(tx.timestamp)}
+                    {new Date(tx.timestamp).toLocaleTimeString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link href={`/address/${tx.from}`} className="text-blue-600 hover:underline">
@@ -96,10 +113,10 @@ export default function Transactions() {
                     </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {tx.value} NCK
+                    {tx.value} NOCK
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {tx.fee} NCK
+                    {(tx.gasUsed * tx.gasPrice / 1e9).toFixed(5)} NOCK
                   </td>
                 </tr>
               ))}
