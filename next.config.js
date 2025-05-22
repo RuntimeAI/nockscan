@@ -3,17 +3,17 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['placekitten.com', 'via.placeholder.com']
-  },
-  output: 'export',
-  distDir: 'out',
-  basePath: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
-  // 仅在生产环境使用assetPrefix
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
-  images: {
+    domains: ['placekitten.com', 'via.placeholder.com'],
     unoptimized: true,
   },
-  // Disable server features since we're doing static export
+  // Only use export in production
+  ...(process.env.NODE_ENV === 'production' ? {
+    output: 'export',
+    distDir: 'out',
+  } : {}),
+  // Base path for GitHub Pages
+  basePath: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
   trailingSlash: true,
 };
 
