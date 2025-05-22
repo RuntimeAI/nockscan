@@ -11,9 +11,9 @@ const nextConfig = {
     output: 'export',
     distDir: 'out',
   } : {}),
-  // Base path for GitHub Pages
-  basePath: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/nockscan' : '',
+  // Base path for GitHub Pages - nockscan is the repo name
+  basePath: process.env.NODE_ENV === 'production' ? '' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : '',
   trailingSlash: true,
 };
 
