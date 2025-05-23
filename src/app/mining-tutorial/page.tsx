@@ -15,10 +15,10 @@ export default function MiningTutorial() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              🚀 Nockchain Mining Guide
+              {t('mining_hero_title')}
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Complete automated setup for Nockchain nodes and mining on Ubuntu servers
+              {t('mining_hero_subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
@@ -27,7 +27,7 @@ export default function MiningTutorial() {
                 rel="noopener noreferrer"
                 className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg"
               >
-                📥 Get Advanced Script (v2)
+                {t('get_advanced_script')}
               </a>
               <a 
                 href="https://github.com/wenqingyu/nockchain-mining-script/tree/main"
@@ -35,7 +35,7 @@ export default function MiningTutorial() {
                 rel="noopener noreferrer"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg"
               >
-                📥 Get Basic Script (v1)
+                {t('get_basic_script')}
               </a>
             </div>
           </div>
@@ -47,11 +47,11 @@ export default function MiningTutorial() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-wrap justify-center gap-2 mb-8">
             {[
-              { id: 'overview', label: '🌟 Overview' },
-              { id: 'requirements', label: '💻 Requirements' },
-              { id: 'basic-setup', label: '🔧 Basic Setup (v1)' },
-              { id: 'advanced-setup', label: '⚡ Advanced Setup (v2)' },
-              { id: 'troubleshooting', label: '🛠️ Troubleshooting' }
+              { id: 'overview', label: t('tab_overview') },
+              { id: 'requirements', label: t('tab_requirements') },
+              { id: 'basic-setup', label: t('tab_basic_setup') },
+              { id: 'advanced-setup', label: t('tab_advanced_setup') },
+              { id: 'troubleshooting', label: t('tab_troubleshooting') }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -71,49 +71,47 @@ export default function MiningTutorial() {
           <div className="bg-white rounded-xl shadow-lg p-8">
             {activeTab === 'overview' && (
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-800">What is Nockchain?</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-800">{t('what_is_nockchain')}</h2>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <p className="text-lg text-gray-700 mb-6">
-                      Nockchain is next-generation blockchain infrastructure optimized for running "Nock" smart contracts. 
-                      It combines principles from Urbit and EVM-compatible logic to provide:
+                      {t('nockchain_desc')}
                     </p>
                     <ul className="space-y-3 text-gray-700">
                       <li className="flex items-start">
                         <span className="text-green-600 mr-2">✅</span>
-                        Decentralized agent execution environment
+                        {t('nockchain_feature_1')}
                       </li>
                       <li className="flex items-start">
                         <span className="text-green-600 mr-2">✅</span>
-                        Deterministic computing using Hoon and Nock
+                        {t('nockchain_feature_2')}
                       </li>
                       <li className="flex items-start">
                         <span className="text-green-600 mr-2">✅</span>
-                        Compact and secure innovative VM layer
+                        {t('nockchain_feature_3')}
                       </li>
                       <li className="flex items-start">
                         <span className="text-green-600 mr-2">✅</span>
-                        Early-stage network with growth potential
+                        {t('nockchain_feature_4')}
                       </li>
                     </ul>
                   </div>
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold mb-4 text-gray-800">🎯 Why Mine Nockchain?</h3>
+                    <h3 className="text-xl font-bold mb-4 text-gray-800">{t('why_mine_nockchain')}</h3>
                     <ul className="space-y-2 text-gray-700">
-                      <li>🚀 Early adoption opportunity</li>
-                      <li>🔒 Secure and innovative technology</li>
-                      <li>🌐 Help decentralize the network</li>
-                      <li>💰 Potential rewards for early miners</li>
-                      <li>🤝 Join a growing community</li>
+                      <li>{t('mine_reason_1')}</li>
+                      <li>{t('mine_reason_2')}</li>
+                      <li>{t('mine_reason_3')}</li>
+                      <li>{t('mine_reason_4')}</li>
+                      <li>{t('mine_reason_5')}</li>
                     </ul>
                   </div>
                 </div>
 
                 <div className="mt-8 p-6 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg">
-                  <h3 className="text-xl font-bold mb-3 text-amber-800">⚠️ Important Note</h3>
+                  <h3 className="text-xl font-bold mb-3 text-amber-800">{t('important_note')}</h3>
                   <p className="text-amber-700">
-                    Nockchain is still in early stages. By running a node or participating in mining, 
-                    you're helping to decentralize and grow the network. Always use secure practices and never risk more than you can afford.
+                    {t('security_warning')}
                   </p>
                 </div>
               </div>
@@ -121,40 +119,40 @@ export default function MiningTutorial() {
 
             {activeTab === 'requirements' && (
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-800">💻 VPS Requirements</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-800">{t('vps_requirements')}</h2>
                 
                 <div className="overflow-x-auto mb-8">
                   <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resource</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Minimum</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Recommended</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('resource')}</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('minimum')}</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('recommended')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Operating System</td>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{t('operating_system')}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">Ubuntu 20.04+ (64-bit)</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">Ubuntu 22.04+ LTS</td>
                       </tr>
                       <tr className="bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">CPU</td>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{t('cpu')}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">8 vCPUs</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">16+ vCPUs</td>
                       </tr>
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Memory</td>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{t('memory')}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">32 GB</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">64+ GB</td>
                       </tr>
                       <tr className="bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Storage</td>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{t('storage')}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">200 GB SSD</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">500+ GB NVMe SSD</td>
                       </tr>
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Network</td>
+                        <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{t('network')}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">Public IPv4 required</td>
                         <td className="px-6 py-4 whitespace-nowrap text-gray-700">1Gbps+ bandwidth</td>
                       </tr>
@@ -164,23 +162,23 @@ export default function MiningTutorial() {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-blue-50 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold mb-4 text-blue-800">🔧 What the Script Installs</h3>
+                    <h3 className="text-xl font-bold mb-4 text-blue-800">{t('what_script_installs')}</h3>
                     <ul className="space-y-2 text-blue-700">
-                      <li>✅ System dependencies</li>
-                      <li>✅ Rust (stable)</li>
-                      <li>✅ Official Nockchain repository</li>
-                      <li>✅ All necessary components (hoonc, wallet, node)</li>
-                      <li>✅ Configuration files and environment setup</li>
-                      <li>✅ PM2 cluster management (v2)</li>
+                      <li>{t('install_feature_1')}</li>
+                      <li>{t('install_feature_2')}</li>
+                      <li>{t('install_feature_3')}</li>
+                      <li>{t('install_feature_4')}</li>
+                      <li>{t('install_feature_5')}</li>
+                      <li>{t('install_feature_6')}</li>
                     </ul>
                   </div>
                   <div className="bg-green-50 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold mb-4 text-green-800">💡 Memory Usage (64GB Server)</h3>
+                    <h3 className="text-xl font-bold mb-4 text-green-800">{t('memory_usage_64gb')}</h3>
                     <ul className="space-y-2 text-green-700">
-                      <li>🖥️ Main node: 12GB</li>
-                      <li>⛏️ 3x Mining nodes: 30GB (10GB each)</li>
-                      <li>🔧 System & other processes: ~22GB</li>
-                      <li>📊 Total: 64GB</li>
+                      <li>{t('memory_main_node')}</li>
+                      <li>{t('memory_mining_nodes')}</li>
+                      <li>{t('memory_system')}</li>
+                      <li>{t('memory_total')}</li>
                     </ul>
                   </div>
                 </div>
@@ -189,19 +187,18 @@ export default function MiningTutorial() {
 
             {activeTab === 'basic-setup' && (
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-800">🔧 Basic Setup (v1) - Setup Only</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-800">{t('basic_setup_title')}</h2>
                 
                 <div className="bg-blue-50 p-6 rounded-lg mb-8">
-                  <h3 className="text-xl font-bold mb-3 text-blue-800">📋 What v1 Includes</h3>
+                  <h3 className="text-xl font-bold mb-3 text-blue-800">{t('v1_includes')}</h3>
                   <p className="text-blue-700 mb-4">
-                    The basic version provides automated installation and setup of Nockchain components. 
-                    Perfect for developers who want to manually configure their mining setup.
+                    {t('v1_description')}
                   </p>
                   <ul className="space-y-2 text-blue-700">
-                    <li>✅ Automated system dependency installation</li>
-                    <li>✅ Rust toolchain setup</li>
-                    <li>✅ Nockchain repository cloning and building</li>
-                    <li>✅ Basic configuration files</li>
+                    <li>✅ {t('auto_install_1')}</li>
+                    <li>✅ {t('auto_install_2')}</li>
+                    <li>✅ {t('auto_install_3')}</li>
+                    <li>✅ {t('install_feature_5')}</li>
                     <li>❌ No automated wallet generation</li>
                     <li>❌ No cluster mining setup</li>
                     <li>❌ Manual node management required</li>
@@ -209,7 +206,7 @@ export default function MiningTutorial() {
                 </div>
 
                 <div className="bg-gray-900 text-green-400 p-6 rounded-lg mb-6">
-                  <h3 className="text-lg font-bold mb-3 text-white">🚀 One-Command Installation</h3>
+                  <h3 className="text-lg font-bold mb-3 text-white">{t('one_command_installation')}</h3>
                   <code className="block bg-gray-800 p-4 rounded text-green-300 overflow-x-auto">
                     bash &lt;(curl -s https://raw.githubusercontent.com/wenqingyu/nockchain-mining-script/main/setup-nockchain.sh)
                   </code>
@@ -217,38 +214,36 @@ export default function MiningTutorial() {
 
                 <div className="space-y-6">
                   <div className="border-l-4 border-blue-500 pl-6">
-                    <h4 className="text-lg font-bold mb-2">Step 1: Run Installation Script</h4>
+                    <h4 className="text-lg font-bold mb-2">{t('setup_step_1')}</h4>
                     <p className="text-gray-700">
-                      Execute the one-command installation on your fresh Ubuntu VPS. 
-                      The script will automatically handle all dependencies and setup.
+                      {t('setup_step_1_desc')}
                     </p>
                   </div>
 
                   <div className="border-l-4 border-blue-500 pl-6">
-                    <h4 className="text-lg font-bold mb-2">Step 2: Manual Configuration</h4>
+                    <h4 className="text-lg font-bold mb-2">{t('setup_step_2')}</h4>
                     <p className="text-gray-700 mb-3">
-                      After installation, you'll need to manually:
+                      {t('setup_step_2_desc')}
                     </p>
                     <ul className="list-disc pl-6 text-gray-700 space-y-1">
-                      <li>Generate wallet keys using nockchain-wallet</li>
-                      <li>Configure mining public key in environment variables</li>
-                      <li>Start nodes manually or create your own process management</li>
+                      <li>{t('manual_config_1')}</li>
+                      <li>{t('manual_config_2')}</li>
+                      <li>{t('manual_config_3')}</li>
                     </ul>
                   </div>
 
                   <div className="border-l-4 border-blue-500 pl-6">
-                    <h4 className="text-lg font-bold mb-2">Step 3: Manual Node Management</h4>
+                    <h4 className="text-lg font-bold mb-2">{t('setup_step_3')}</h4>
                     <p className="text-gray-700">
-                      Use standard command line tools to manage your nodes. Suitable for experienced users 
-                      who prefer granular control over their mining setup.
+                      {t('setup_step_3_desc')}
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-8 p-6 bg-amber-50 border-l-4 border-amber-500 rounded-r-lg">
-                  <h3 className="text-lg font-bold mb-2 text-amber-800">💡 Best For</h3>
+                  <h3 className="text-lg font-bold mb-2 text-amber-800">{t('best_for_v1')}</h3>
                   <p className="text-amber-700">
-                    Developers and advanced users who want to understand the setup process and prefer manual control over their mining configuration.
+                    {t('v1_best_for')}
                   </p>
                 </div>
               </div>
@@ -256,13 +251,12 @@ export default function MiningTutorial() {
 
             {activeTab === 'advanced-setup' && (
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-800">⚡ Advanced Setup (v2) - Complete Solution</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-800">{t('advanced_setup_title')}</h2>
                 
                 <div className="bg-green-50 p-6 rounded-lg mb-8">
-                  <h3 className="text-xl font-bold mb-3 text-green-800">🎯 What v2 Includes</h3>
+                  <h3 className="text-xl font-bold mb-3 text-green-800">{t('v2_includes')}</h3>
                   <p className="text-green-700 mb-4">
-                    The advanced version provides a complete, production-ready mining solution with automated setup, 
-                    wallet management, and cluster mining for maximum efficiency.
+                    {t('v2_description')}
                   </p>
                   <div className="grid md:grid-cols-2 gap-4">
                     <ul className="space-y-2 text-green-700">
@@ -283,7 +277,7 @@ export default function MiningTutorial() {
                 </div>
 
                 <div className="bg-gray-900 text-green-400 p-6 rounded-lg mb-6">
-                  <h3 className="text-lg font-bold mb-3 text-white">🚀 One-Command Installation</h3>
+                  <h3 className="text-lg font-bold mb-3 text-white">{t('one_command_installation')}</h3>
                   <code className="block bg-gray-800 p-4 rounded text-green-300 overflow-x-auto">
                     bash &lt;(curl -s https://raw.githubusercontent.com/wenqingyu/nockchain-mining-script/v2/setup-nockchain.sh)
                   </code>
@@ -291,21 +285,21 @@ export default function MiningTutorial() {
 
                 <div className="space-y-8">
                   <div className="border-l-4 border-green-500 pl-6">
-                    <h4 className="text-xl font-bold mb-3">Step 1: Automated Installation</h4>
+                    <h4 className="text-xl font-bold mb-3">{t('v2_step_1')}</h4>
                     <p className="text-gray-700 mb-3">
-                      Run the installation script on your Ubuntu VPS. It will automatically:
+                      {t('v2_step_1_desc')}
                     </p>
                     <ul className="list-disc pl-6 text-gray-700 space-y-1">
-                      <li>Install all system dependencies</li>
-                      <li>Setup Rust toolchain</li>
-                      <li>Clone and build Nockchain</li>
-                      <li>Download configuration files</li>
-                      <li>Create default environment setup</li>
+                      <li>{t('auto_install_1')}</li>
+                      <li>{t('auto_install_2')}</li>
+                      <li>{t('auto_install_3')}</li>
+                      <li>{t('auto_install_4')}</li>
+                      <li>{t('auto_install_5')}</li>
                     </ul>
                   </div>
 
                   <div className="border-l-4 border-green-500 pl-6">
-                    <h4 className="text-xl font-bold mb-3">Step 2: Wallet Generation</h4>
+                    <h4 className="text-xl font-bold mb-3">{t('v2_step_2')}</h4>
                     <div className="bg-gray-100 p-4 rounded-lg mb-3">
                       <code className="text-gray-800">
                         cd ~/nockchain<br/>
@@ -313,13 +307,12 @@ export default function MiningTutorial() {
                       </code>
                     </div>
                     <p className="text-gray-700">
-                      This generates your wallet with mnemonic phrase, private/public keys, and chain code. 
-                      <strong className="text-red-600"> Save this information securely!</strong>
+                      {t('v2_step_2_desc')}
                     </p>
                   </div>
 
                   <div className="border-l-4 border-green-500 pl-6">
-                    <h4 className="text-xl font-bold mb-3">Step 3: Configuration</h4>
+                    <h4 className="text-xl font-bold mb-3">{t('v2_step_3')}</h4>
                     <div className="bg-gray-100 p-4 rounded-lg mb-3">
                       <code className="text-gray-800">
                         cp env.template .env<br/>
@@ -327,25 +320,24 @@ export default function MiningTutorial() {
                       </code>
                     </div>
                     <p className="text-gray-700">
-                      Update the MINING_PUBKEY with your generated public key. 
-                      Memory settings are pre-optimized for 64GB servers.
+                      {t('v2_step_3_desc')}
                     </p>
                   </div>
 
                   <div className="border-l-4 border-green-500 pl-6">
-                    <h4 className="text-xl font-bold mb-3">Step 4: Choose Running Method</h4>
+                    <h4 className="text-xl font-bold mb-3">{t('v2_step_4')}</h4>
                     
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="bg-blue-50 p-4 rounded-lg">
-                        <h5 className="font-bold mb-2 text-blue-800">🔧 Method 1: Make Command</h5>
+                        <h5 className="font-bold mb-2 text-blue-800">{t('method_1_title')}</h5>
                         <div className="bg-white p-3 rounded border">
                           <code className="text-gray-800">make run-nockchain</code>
                         </div>
-                        <p className="text-sm text-blue-700 mt-2">Simple direct execution</p>
+                        <p className="text-sm text-blue-700 mt-2">{t('method_1_desc')}</p>
                       </div>
                       
                       <div className="bg-green-50 p-4 rounded-lg">
-                        <h5 className="font-bold mb-2 text-green-800">⚡ Method 2: PM2 Cluster (Recommended)</h5>
+                        <h5 className="font-bold mb-2 text-green-800">{t('method_2_title')}</h5>
                         <div className="bg-white p-3 rounded border text-sm">
                           <code className="text-gray-800">
                             # Install Node.js & PM2<br/>
@@ -356,16 +348,16 @@ export default function MiningTutorial() {
                             pm2 start ecosystem.config.js
                           </code>
                         </div>
-                        <p className="text-sm text-green-700 mt-2">Production-ready with monitoring</p>
+                        <p className="text-sm text-green-700 mt-2">{t('method_2_desc')}</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="border-l-4 border-green-500 pl-6">
-                    <h4 className="text-xl font-bold mb-3">Step 5: Monitoring & Management</h4>
+                    <h4 className="text-xl font-bold mb-3">{t('v2_step_5')}</h4>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <h6 className="font-bold mb-2">PM2 Commands</h6>
+                        <h6 className="font-bold mb-2">{t('pm2_commands')}</h6>
                         <div className="bg-gray-100 p-3 rounded text-sm">
                           <code className="text-gray-800">
                             pm2 status        # Check status<br/>
@@ -376,7 +368,7 @@ export default function MiningTutorial() {
                         </div>
                       </div>
                       <div>
-                        <h6 className="font-bold mb-2">Blockchain Monitoring</h6>
+                        <h6 className="font-bold mb-2">{t('blockchain_monitoring')}</h6>
                         <div className="bg-gray-100 p-3 rounded text-sm">
                           <code className="text-gray-800">
                             ./check-blockchain.sh  # Status check<br/>
@@ -389,10 +381,9 @@ export default function MiningTutorial() {
                 </div>
 
                 <div className="mt-8 p-6 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
-                  <h3 className="text-lg font-bold mb-2 text-green-800">🏆 Best For</h3>
+                  <h3 className="text-lg font-bold mb-2 text-green-800">{t('best_for_v2')}</h3>
                   <p className="text-green-700">
-                    Miners who want a complete, production-ready solution with maximum efficiency and minimal setup time. 
-                    Ideal for serious miners and those running multiple nodes.
+                    {t('v2_best_for')}
                   </p>
                 </div>
               </div>
@@ -400,16 +391,16 @@ export default function MiningTutorial() {
 
             {activeTab === 'troubleshooting' && (
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-gray-800">🛠️ Troubleshooting & FAQ</h2>
+                <h2 className="text-3xl font-bold mb-6 text-gray-800">{t('troubleshooting_title')}</h2>
                 
                 <div className="space-y-6">
                   <div className="border rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-3 text-red-600">❌ Common Issues</h3>
+                    <h3 className="text-xl font-bold mb-3 text-red-600">{t('common_issues')}</h3>
                     
                     <div className="space-y-4">
                       <div className="border-l-4 border-red-400 pl-4">
-                        <h4 className="font-bold mb-2">Installation Script Fails</h4>
-                        <p className="text-gray-700 mb-2">Check your Ubuntu version and internet connection:</p>
+                        <h4 className="font-bold mb-2">{t('issue_1_title')}</h4>
+                        <p className="text-gray-700 mb-2">{t('issue_1_desc')}</p>
                         <div className="bg-gray-100 p-3 rounded">
                           <code className="text-gray-800">
                             lsb_release -a      # Check Ubuntu version<br/>
@@ -419,8 +410,8 @@ export default function MiningTutorial() {
                       </div>
 
                       <div className="border-l-4 border-red-400 pl-4">
-                        <h4 className="font-bold mb-2">Out of Memory Errors</h4>
-                        <p className="text-gray-700 mb-2">Adjust memory limits in ecosystem.config.js:</p>
+                        <h4 className="font-bold mb-2">{t('issue_2_title')}</h4>
+                        <p className="text-gray-700 mb-2">{t('issue_2_desc')}</p>
                         <div className="bg-gray-100 p-3 rounded">
                           <code className="text-gray-800">
                             MAIN_NODE_MEMORY=8G     # Reduce if needed<br/>
@@ -431,8 +422,8 @@ export default function MiningTutorial() {
                       </div>
 
                       <div className="border-l-4 border-red-400 pl-4">
-                        <h4 className="font-bold mb-2">Nodes Won't Start</h4>
-                        <p className="text-gray-700 mb-2">Check logs and socket permissions:</p>
+                        <h4 className="font-bold mb-2">{t('issue_3_title')}</h4>
+                        <p className="text-gray-700 mb-2">{t('issue_3_desc')}</p>
                         <div className="bg-gray-100 p-3 rounded">
                           <code className="text-gray-800">
                             pm2 logs                                    # Check PM2 logs<br/>
@@ -445,34 +436,34 @@ export default function MiningTutorial() {
                   </div>
 
                   <div className="border rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-3 text-blue-600">💡 Performance Tips</h3>
+                    <h3 className="text-xl font-bold mb-3 text-blue-600">{t('performance_tips')}</h3>
                     
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-bold mb-2">🚀 Optimization</h4>
+                        <h4 className="font-bold mb-2">{t('optimization')}</h4>
                         <ul className="space-y-2 text-gray-700">
-                          <li>• Use NVMe SSD for better I/O</li>
-                          <li>• Enable swap if memory is limited</li>
-                          <li>• Monitor CPU temperature</li>
-                          <li>• Use dedicated VPS (not shared)</li>
-                          <li>• Ensure stable network connection</li>
+                          <li>{t('optimization_1')}</li>
+                          <li>{t('optimization_2')}</li>
+                          <li>{t('optimization_3')}</li>
+                          <li>{t('optimization_4')}</li>
+                          <li>{t('optimization_5')}</li>
                         </ul>
                       </div>
                       <div>
-                        <h4 className="font-bold mb-2">📊 Monitoring</h4>
+                        <h4 className="font-bold mb-2">{t('monitoring')}</h4>
                         <ul className="space-y-2 text-gray-700">
-                          <li>• Use <code>htop</code> for resource monitoring</li>
-                          <li>• Check <code>pm2 monit</code> regularly</li>
-                          <li>• Monitor log files for errors</li>
-                          <li>• Track blockchain synchronization</li>
-                          <li>• Set up alerts for downtime</li>
+                          <li>{t('monitoring_1')}</li>
+                          <li>{t('monitoring_2')}</li>
+                          <li>{t('monitoring_3')}</li>
+                          <li>{t('monitoring_4')}</li>
+                          <li>{t('monitoring_5')}</li>
                         </ul>
                       </div>
                     </div>
                   </div>
 
                   <div className="border rounded-lg p-6">
-                    <h3 className="text-xl font-bold mb-3 text-green-600">📚 Useful Commands</h3>
+                    <h3 className="text-xl font-bold mb-3 text-green-600">{t('useful_commands')}</h3>
                     
                     <div className="bg-gray-100 p-4 rounded">
                       <code className="text-gray-800 text-sm">
@@ -494,9 +485,9 @@ export default function MiningTutorial() {
                   </div>
 
                   <div className="border rounded-lg p-6 bg-blue-50">
-                    <h3 className="text-xl font-bold mb-3 text-blue-800">🤝 Get Help</h3>
+                    <h3 className="text-xl font-bold mb-3 text-blue-800">{t('get_help')}</h3>
                     <p className="text-blue-700 mb-4">
-                      Need more help? Join the community and get support:
+                      {t('get_help_desc')}
                     </p>
                     <div className="flex flex-wrap gap-4">
                       <a 
@@ -505,7 +496,7 @@ export default function MiningTutorial() {
                         rel="noopener noreferrer"
                         className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors"
                       >
-                        📝 GitHub Issues
+                        {t('github_issues')}
                       </a>
                       <a 
                         href="https://nockchain.org"
@@ -513,7 +504,7 @@ export default function MiningTutorial() {
                         rel="noopener noreferrer"
                         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
                       >
-                        🌐 Official Website
+                        🌐 {t('official_site')}
                       </a>
                     </div>
                   </div>
@@ -524,9 +515,9 @@ export default function MiningTutorial() {
 
           {/* Call to Action */}
           <div className="mt-12 bg-gradient-to-r from-green-600 to-blue-600 text-white p-8 rounded-xl text-center">
-            <h2 className="text-2xl font-bold mb-4">Ready to Start Mining Nockchain?</h2>
+            <h2 className="text-2xl font-bold mb-4">{t('ready_to_start')}</h2>
             <p className="text-lg mb-6">
-              Join the early miners and help secure the Nockchain network while earning rewards
+              {t('ready_desc')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
@@ -535,13 +526,13 @@ export default function MiningTutorial() {
                 rel="noopener noreferrer"
                 className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors"
               >
-                🚀 Start with Advanced Script (v2)
+                {t('start_advanced')}
               </a>
               <Link 
                 href="/"
                 className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-600 transition-colors"
               >
-                📊 View Network Stats
+                {t('view_network_stats')}
               </Link>
             </div>
           </div>
