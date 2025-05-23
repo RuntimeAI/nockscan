@@ -287,7 +287,7 @@ const translations: Record<Language, TranslationDictionary> = {
     "tab_advanced_setup": "⚡ 高级设置 (v2)",
     "tab_troubleshooting": "🛠️ 故障排除",
     "what_is_nockchain": "什么是 Nockchain？",
-    "nockchain_desc": "Nockchain 是为运行\"Nock\"智能合约而优化的新一代区块链基础设施。它结合了 Urbit 的原理和 EVM 兼容逻辑，提供：",
+    "nockchain_desc": "Nockchain 是为运行 \"Nock\" 智能合约而优化的新一代区块链基础设施。它结合了 Urbit 的原理和 EVM 兼容逻辑，提供：",
     "nockchain_feature_1": "去中心化代理执行环境",
     "nockchain_feature_2": "使用 Hoon 和 Nock 的确定性计算",
     "nockchain_feature_3": "紧凑而安全的创新虚拟机层",
@@ -391,17 +391,17 @@ const translations: Record<Language, TranslationDictionary> = {
     "view_network_stats": "📊 查看网络统计",
 
     // Homepage Mining Promotion
-    "start_mining_today": "Start Mining Nockchain Today!",
-    "join_early_miners": "Join early miners and help secure the network while earning rewards",
-    "early_adoption_title": "Early Adoption",
-    "early_adoption_desc": "Get in early while the network is growing. Early miners have the best opportunities.",
-    "one_click_setup_title": "One-Click Setup", 
-    "one_click_setup_desc": "Our automated script sets up everything for you. No complex configuration needed.",
-    "earn_rewards_title": "Earn Rewards",
-    "earn_rewards_desc": "Mine NOCK tokens and earn rewards for securing the Nockchain network.",
-    "view_mining_tutorial": "View Mining Tutorial",
-    "get_mining_script": "Get Mining Script",
-    "mining_features": "Works on Ubuntu servers • Automated setup • Production ready"
+    "start_mining_today": "⛏️ 今天就开始挖 Nockchain！",
+    "join_early_miners": "加入早期矿工，在获得奖励的同时帮助保护网络安全",
+    "early_adoption_title": "🚀 早期采用",
+    "early_adoption_desc": "趁网络发展初期尽早加入。早期矿工拥有最佳机会。",
+    "one_click_setup_title": "⚡ 一键设置", 
+    "one_click_setup_desc": "我们的自动化脚本为您设置一切。无需复杂配置。",
+    "earn_rewards_title": "💰 赚取奖励",
+    "earn_rewards_desc": "挖掘 NOCK 代币，通过保护 Nockchain 网络获得奖励。",
+    "view_mining_tutorial": "📚 查看挖矿教程",
+    "get_mining_script": "🛠️ 获取挖矿脚本",
+    "mining_features": "✅ 支持 Ubuntu 服务器 • ✅ 自动化设置 • ✅ 生产就绪"
   }
 };
 

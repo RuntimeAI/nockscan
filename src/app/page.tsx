@@ -50,35 +50,35 @@ export default function Home() {
         <div className="mt-8 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 rounded-xl shadow-lg p-8 text-white">
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              ⛏️ Start Mining Nockchain Today!
+              {t('start_mining_today')}
             </h2>
             <p className="text-xl md:text-2xl text-green-100 mb-6">
-              Join early miners and help secure the network while earning rewards
+              {t('join_early_miners')}
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 text-center">
               <div className="text-4xl mb-3">🚀</div>
-              <h3 className="text-xl font-bold mb-2">Early Adoption</h3>
+              <h3 className="text-xl font-bold mb-2">{t('early_adoption_title')}</h3>
               <p className="text-green-100">
-                Get in early while the network is growing. Early miners have the best opportunities.
+                {t('early_adoption_desc')}
               </p>
             </div>
             
             <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 text-center">
               <div className="text-4xl mb-3">⚡</div>
-              <h3 className="text-xl font-bold mb-2">One-Click Setup</h3>
+              <h3 className="text-xl font-bold mb-2">{t('one_click_setup_title')}</h3>
               <p className="text-green-100">
-                Our automated script sets up everything for you. No complex configuration needed.
+                {t('one_click_setup_desc')}
               </p>
             </div>
             
             <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 text-center">
               <div className="text-4xl mb-3">💰</div>
-              <h3 className="text-xl font-bold mb-2">Earn Rewards</h3>
+              <h3 className="text-xl font-bold mb-2">{t('earn_rewards_title')}</h3>
               <p className="text-green-100">
-                Mine NOCK tokens and earn rewards for securing the Nockchain network.
+                {t('earn_rewards_desc')}
               </p>
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function Home() {
                 href="/mining-tutorial"
                 className="bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
               >
-                📚 View Mining Tutorial
+                {t('view_mining_tutorial')}
               </Link>
               <a 
                 href="https://github.com/wenqingyu/nockchain-mining-script/tree/v2"
@@ -97,11 +97,11 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg"
               >
-                🛠️ Get Mining Script
+                {t('get_mining_script')}
               </a>
             </div>
             <p className="text-sm text-green-100 mt-4">
-              ✅ Works on Ubuntu servers • ✅ Automated setup • ✅ Production ready
+              {t('mining_features')}
             </p>
           </div>
         </div>
