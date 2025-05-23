@@ -7,6 +7,7 @@ import { Block, Transaction, mockBlocks, mockTransactions, formatTimestamp, trun
 export default function ClientComponent({ id }: { id: string }) {
   const [block, setBlock] = useState<Block | null>(null);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [formattedDate, setFormattedDate] = useState<string>("");
 
   useEffect(() => {
     // Find the block with the matching ID in our mock data
@@ -19,6 +20,9 @@ export default function ClientComponent({ id }: { id: string }) {
       // Find transactions in this block
       const blockTransactions = mockTransactions.filter((tx: Transaction) => tx.block === blockNumber);
       setTransactions(blockTransactions);
+      
+      // Pre-format the date to avoid hydration mismatch
+      setFormattedDate(new Date(foundBlock.timestamp).toLocaleString());
     }
   }, [id]);
 
@@ -55,7 +59,7 @@ export default function ClientComponent({ id }: { id: string }) {
               
               <div>
                 <div className="font-medium text-gray-500">Timestamp</div>
-                <div>{new Date(block.timestamp).toLocaleString()} ({formatTimestamp(block.timestamp)})</div>
+                <div>{formattedDate} ({formatTimestamp(block.timestamp)})</div>
               </div>
               
               <div>

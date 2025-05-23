@@ -15,6 +15,7 @@ interface Transaction {
   gasUsed: number;
   gasPrice: number;
   status: string;
+  formattedTime?: string; // Add this for pre-formatted times
 }
 
 export default function Transactions() {
@@ -28,7 +29,11 @@ export default function Transactions() {
       const dateA = new Date(a.timestamp).getTime();
       const dateB = new Date(b.timestamp).getTime();
       return dateB - dateA;
-    });
+    }).map(tx => ({
+      ...tx,
+      formattedTime: new Date(tx.timestamp).toLocaleTimeString() // Pre-format times to avoid hydration mismatch
+    }));
+    
     setTransactions(sortedTransactions);
   }, []);
 
@@ -100,7 +105,7 @@ export default function Transactions() {
                     </Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-gray-500">
-                    {new Date(tx.timestamp).toLocaleTimeString()}
+                    {tx.formattedTime}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link href={`/address/${tx.from}`} className="text-blue-600 hover:underline">

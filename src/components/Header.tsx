@@ -59,6 +59,9 @@ export default function Header() {
               <Link href="/txs" className="hover:text-blue-200 transition-colors">
                 {t('transactions')}
               </Link>
+              <Link href="/mining-tutorial" className="hover:text-blue-200 transition-colors bg-green-600 hover:bg-green-700 px-3 py-1 rounded font-bold">
+                ⛏️ Mining
+              </Link>
               <a href="https://github.com/zorp-corp/nockchain" target="_blank" rel="noopener noreferrer" className="hover:text-blue-200 transition-colors">
                 {t('docs')}
               </a>

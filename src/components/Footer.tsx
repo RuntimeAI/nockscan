@@ -49,6 +49,7 @@ export default function Footer() {
           <div>
             <h4 className="font-bold mb-4 text-white">{t('resources')}</h4>
             <ul className="space-y-2 text-sm">
+              <li><Link href="/mining-tutorial" className="text-green-400 hover:text-green-300 transition-colors font-bold">⛏️ Mining Tutorial</Link></li>
               <li><a href="https://github.com/zorp-corp/nockchain" className="text-gray-400 hover:text-blue-300 transition-colors" target="_blank" rel="noopener noreferrer">{t('dev_docs')}</a></li>
               <li><a href="https://www.nockchain.org/" className="text-gray-400 hover:text-blue-300 transition-colors" target="_blank" rel="noopener noreferrer">{t('official_site')}</a></li>
               <li><Link href="/" className="text-gray-400 hover:text-blue-300 transition-colors">{t('api_docs')}</Link></li>
